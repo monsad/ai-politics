@@ -3,7 +3,7 @@
 **Version:** v1 (contest submission)
 **Deadline:** 2026-05-31 23:59 PDT
 **Created:** 2026-05-26
-**Status:** Defined — pending roadmap mapping
+**Status:** Roadmap mapped — 64 requirements across 5 phases
 
 This document is the authoritative scope for the Hermes Agent Challenge submission. Every Active requirement here must map to exactly one roadmap phase. Out of Scope items are deliberately excluded; re-adding requires explicit discussion.
 
@@ -149,12 +149,75 @@ All 7 gates must pass before scaling to 25 agents. Unanimous recommendation from
 
 ## Traceability — Requirement → Phase
 
-This section is populated by `gsd-roadmapper` during Step 8 of the new-project workflow. Each REQ above must map to exactly one phase.
+Populated by `gsd-roadmapper` on 2026-05-26. 64 v1 requirements mapped across 5 phases.
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| (filled by roadmapper) | | |
+| GATE-01 | Phase 1 | Pending |
+| GATE-02 | Phase 1 | Pending |
+| GATE-03 | Phase 1 | Pending |
+| GATE-04 | Phase 1 | Pending |
+| GATE-05 | Phase 1 | Pending |
+| GATE-06 | Phase 1 | Pending |
+| GATE-07 | Phase 1 | Pending |
+| INFRA-01 | Phase 1 | Pending |
+| INFRA-02 | Phase 1 | Pending |
+| INFRA-03 | Phase 1 | Pending |
+| BRAIN-01 | Phase 1 | Pending |
+| BRAIN-02 | Phase 1 | Pending |
+| BRAIN-06 | Phase 1 | Pending |
+| SKILL-01 | Phase 2 | Pending |
+| SKILL-02 | Phase 2 | Pending |
+| SKILL-03 | Phase 2 | Pending |
+| PARTY-01 | Phase 2 | Pending |
+| PARTY-02 | Phase 2 | Pending |
+| PARTY-03 | Phase 2 | Pending |
+| PARTY-04 | Phase 2 | Pending |
+| PARTY-05 | Phase 2 | Pending |
+| MIN-01 | Phase 2 | Pending |
+| MIN-02 | Phase 2 | Pending |
+| MIN-03 | Phase 2 | Pending |
+| MIN-04 | Phase 2 | Pending |
+| BRAIN-03 | Phase 2 | Pending |
+| BRAIN-04 | Phase 2 | Pending |
+| BRAIN-05 | Phase 2 | Pending |
+| ETHICS-02 | Phase 2 | Pending |
+| ETHICS-03 | Phase 2 | Pending |
+| ETHICS-04 | Phase 2 | Pending |
+| LANG-01 | Phase 2 | Pending |
+| LANG-02 | Phase 2 | Pending |
+| LANG-03 | Phase 2 | Pending |
+| INFRA-04 | Phase 3 | Pending |
+| INFRA-05 | Phase 3 | Pending |
+| INFRA-06 | Phase 3 | Pending |
+| ORCH-01 | Phase 3 | Pending |
+| ORCH-02 | Phase 3 | Pending |
+| ORCH-03 | Phase 3 | Pending |
+| ORCH-04 | Phase 3 | Pending |
+| ORCH-05 | Phase 3 | Pending |
+| ORCH-06 | Phase 3 | Pending |
+| ORCH-07 | Phase 3 | Pending |
+| ORCH-08 | Phase 3 | Pending |
+| ORCH-09 | Phase 3 | Pending |
+| CLI-01 | Phase 3 | Pending |
+| CLI-02 | Phase 3 | Pending |
+| CLI-03 | Phase 3 | Pending |
+| CLI-04 | Phase 3 | Pending |
+| CLI-05 | Phase 3 | Pending |
+| EXPORT-01 | Phase 3 | Pending |
+| ETHICS-01 | Phase 3 | Pending |
+| WEB-01 | Phase 4 | Pending |
+| WEB-02 | Phase 4 | Pending |
+| WEB-03 | Phase 4 | Pending |
+| WEB-04 | Phase 4 | Pending |
+| DEMO-01 | Phase 5 | Pending |
+| DEMO-02 | Phase 5 | Pending |
+| DEMO-03 | Phase 5 | Pending |
+| DEMO-04 | Phase 5 | Pending |
+| DEMO-05 | Phase 5 | Pending |
+| DEMO-06 | Phase 5 | Pending |
+| DEMO-07 | Phase 5 | Pending |
 
 ---
 
-*Last updated: 2026-05-26 after initialization. Source documents: PROJECT.md, research/SUMMARY.md, research/FEATURES.md, research/STACK.md, research/ARCHITECTURE.md, research/PITFALLS.md, prd.md.*
+*Last updated: 2026-05-26 — traceability populated by gsd-roadmapper. Source documents: PROJECT.md, research/SUMMARY.md, research/FEATURES.md, research/STACK.md, research/ARCHITECTURE.md, research/PITFALLS.md, prd.md.*
