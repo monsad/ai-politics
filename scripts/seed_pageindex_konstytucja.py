@@ -12,6 +12,11 @@ Responsibilities (CONTEXT.md "PageIndex Cloud seed script — concrete responsib
 This script does NOT use hermes-agent. It uses httpx directly because seeding
 happens before any Hermes Agent runs (chicken-and-egg with MCP setup).
 
+API: https://api.pageindex.ai (FastAPI, OpenAPI spec at /openapi.json)
+  - POST /doc       multipart/form-data, required field: file
+  - GET  /doc/{id}  status polling
+  - GET  /docs      list all documents
+
 Usage:
     python scripts/seed_pageindex_konstytucja.py
 
@@ -21,6 +26,7 @@ fixtures to capture.
 
 from __future__ import annotations
 
+import json
 import os
 import sys
 import time
@@ -38,7 +44,9 @@ LOCAL_PDF_CACHE = REPO_ROOT / "data" / "konstytucja.pdf"
 PAGEINDEX_BASE_URL = os.environ.get(
     "PAGEINDEX_BASE_URL", "https://api.pageindex.ai"
 )
+# Stored as JSON string in the metadata field so we can find the doc on re-runs.
 SOURCE_REF = "konstytucja-rp-isap-1997-78-483"
+DOC_TITLE = "Konstytucja Rzeczypospolitej Polskiej"
 
 
 def fetch_pdf(client: httpx.Client) -> Path:
@@ -56,35 +64,44 @@ def fetch_pdf(client: httpx.Client) -> Path:
 
 
 def find_existing_doc(client: httpx.Client, api_key: str) -> str | None:
-    """Return existing doc_id if a doc with our SOURCE_REF was already ingested."""
+    """Return existing doc_id if Konstytucja was already ingested (checks title)."""
     try:
         r = client.get(
-            f"{PAGEINDEX_BASE_URL}/v1/docs",
+            f"{PAGEINDEX_BASE_URL}/docs",
             headers={"Authorization": f"Bearer {api_key}"},
-            params={"source_ref": SOURCE_REF},
             timeout=30.0,
         )
-        if r.status_code == 404:
-            return None
         r.raise_for_status()
-        docs = r.json().get("docs", [])
-        if docs:
-            doc_id = docs[0].get("id") or docs[0].get("doc_id")
-            print(f"[seed] Found existing doc_id={doc_id}")
-            return doc_id
+        docs = r.json().get("documents", [])
+        for doc in docs:
+            # Match by title or source_ref stored in metadata
+            title = doc.get("title") or doc.get("name") or ""
+            meta = doc.get("metadata") or {}
+            if isinstance(meta, str):
+                try:
+                    meta = json.loads(meta)
+                except Exception:
+                    meta = {}
+            if DOC_TITLE in title or meta.get("source_ref") == SOURCE_REF:
+                doc_id = doc.get("id") or doc.get("doc_id")
+                print(f"[seed] Found existing doc_id={doc_id} (title={title!r})")
+                return doc_id
     except Exception as e:
         print(f"[seed] WARN — could not check for existing doc: {e}")
     return None
 
 
 def upload_pdf(client: httpx.Client, api_key: str, pdf_path: Path) -> str:
-    """Upload PDF to PageIndex Cloud; return doc_id."""
-    print(f"[seed] Uploading {pdf_path.name} to {PAGEINDEX_BASE_URL}/v1/ingest")
+    """Upload PDF to PageIndex Cloud via POST /doc; return doc_id."""
+    print(f"[seed] Uploading {pdf_path.name} to {PAGEINDEX_BASE_URL}/doc")
     with pdf_path.open("rb") as f:
         files = {"file": (pdf_path.name, f, "application/pdf")}
-        data = {"source_ref": SOURCE_REF, "title": "Konstytucja Rzeczypospolitej Polskiej"}
+        data = {
+            "metadata": json.dumps({"source_ref": SOURCE_REF, "title": DOC_TITLE}),
+            "if_ocr": "true",
+        }
         r = client.post(
-            f"{PAGEINDEX_BASE_URL}/v1/ingest",
+            f"{PAGEINDEX_BASE_URL}/doc",
             headers={"Authorization": f"Bearer {api_key}"},
             files=files,
             data=data,
@@ -92,7 +109,11 @@ def upload_pdf(client: httpx.Client, api_key: str, pdf_path: Path) -> str:
         )
     r.raise_for_status()
     payload = r.json()
-    doc_id = payload.get("id") or payload.get("doc_id")
+    doc_id = (
+        payload.get("id")
+        or payload.get("doc_id")
+        or payload.get("document_id")
+    )
     if not doc_id:
         raise RuntimeError(f"PageIndex upload returned no doc_id: {payload!r}")
     print(f"[seed] Uploaded — doc_id={doc_id}")
@@ -100,25 +121,26 @@ def upload_pdf(client: httpx.Client, api_key: str, pdf_path: Path) -> str:
 
 
 def wait_for_indexing(client: httpx.Client, api_key: str, doc_id: str) -> None:
-    """Poll PageIndex until doc status is `ready` or `indexed`."""
+    """Poll GET /doc/{doc_id} until status is ready/indexed/completed."""
     print(f"[seed] Waiting for indexing of doc_id={doc_id}")
     deadline = time.monotonic() + 600  # 10 minute hard cap
     while time.monotonic() < deadline:
         r = client.get(
-            f"{PAGEINDEX_BASE_URL}/v1/docs/{doc_id}",
+            f"{PAGEINDEX_BASE_URL}/doc/{doc_id}",
             headers={"Authorization": f"Bearer {api_key}"},
             timeout=30.0,
         )
         r.raise_for_status()
-        status = r.json().get("status")
-        print(f"[seed]   status={status}")
-        if status in ("ready", "indexed", "completed"):
-            print(f"[seed] Indexing complete.")
+        payload = r.json()
+        doc_status = payload.get("status") or payload.get("state") or "unknown"
+        print(f"[seed]   status={doc_status}")
+        if doc_status in ("ready", "indexed", "completed", "done", "success"):
+            print("[seed] Indexing complete.")
             return
-        if status in ("failed", "error"):
-            raise RuntimeError(f"PageIndex ingest failed: {r.json()!r}")
+        if doc_status in ("failed", "error"):
+            raise RuntimeError(f"PageIndex ingest failed: {payload!r}")
         time.sleep(5)
-    raise TimeoutError(f"PageIndex did not finish indexing within 10 minutes")
+    raise TimeoutError("PageIndex did not finish indexing within 10 minutes")
 
 
 def main() -> int:
@@ -127,7 +149,7 @@ def main() -> int:
     if not api_key or api_key.startswith("replace-with"):
         print(
             "[seed] ERROR: PAGEINDEX_API_KEY is not set in .env. "
-            "Provision it at https://dash.pageindex.ai first (see Plan 04 Task 1).",
+            "Provision it at https://dash.pageindex.ai first.",
             file=sys.stderr,
         )
         return 2
