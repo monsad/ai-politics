@@ -31,7 +31,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. `delegate_task(tasks=[task1, task2])` with two dummy tasks returns both results without deadlock
   4. `npx skills-ref@0.1.5 validate skills/party-ko` exits 0 on the canonical SKILL.md template (pre-commit hook installed)
   5. The public GitHub repo has MIT LICENSE at root, `.env.example` documents all required env vars, and `make setup && make demo` targets exist
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 01-01-repo-scaffold-PLAN.md — MIT LICENSE, pyproject.toml pins, Makefile, parliament package skeleton, TokenBudget stub (INFRA-01, INFRA-02)
+- [ ] 01-02-skills-tooling-PLAN.md — minimal party-ko SKILL.md, pre-commit + CI wiring for skills-ref, GATE-06 pytest (INFRA-03, GATE-06)
+- [ ] 01-03-hermes-gates-PLAN.md — GATE-01 import test, GATE-02 minimal AIAgent, GATE-03 delegate_task fan-out (GATE-01, GATE-02, GATE-03)
+- [ ] 01-04-pageindex-cloud-PLAN.md — PageIndex Cloud provisioning checkpoint, hermes config snippet, page budget doc, seed script, PageIndexClient (BRAIN-01, BRAIN-02, BRAIN-06)
+- [ ] 01-05-pageindex-gates-PLAN.md — GATE-04 doc_search, GATE-05 diacritic round-trip, GATE-07 3 concurrent queries (GATE-04, GATE-05, GATE-07)
 
 ### Phase 2: Agent Skills & Corpus
 **Goal**: All 25 agents are written, validated, and ideologically differentiated; the full curated corpus (~50 docs) is ingested and scoped per-ministry; ethics review is complete; agents output English with Polish citations in `(orig. PL: "...")` format
@@ -106,7 +112,7 @@ Phases execute in strict calendar order: 1 (May 26) → 2 (May 27–28) → 3 (M
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Smoke Tests | 0/TBD | Not started | - |
+| 1. Foundation & Smoke Tests | 0/5 | Not started | - |
 | 2. Agent Skills & Corpus | 0/TBD | Not started | - |
 | 3. Orchestrator & CLI | 0/TBD | Not started | - |
 | 4. Web & Demo Prep | 0/TBD | Not started | - |
