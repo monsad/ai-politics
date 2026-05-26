@@ -1,0 +1,347 @@
+{
+  "kodeks-karny-1997-88-553": {
+    "doc_id": null,
+    "title": "Kodeks karny",
+    "domain": "justice",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "kodeks-cywilny-1964-16-93": {
+    "doc_id": null,
+    "title": "Kodeks cywilny",
+    "domain": "justice",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "kodeks-pracy-1974-24-141": {
+    "doc_id": null,
+    "title": "Kodeks pracy",
+    "domain": "labor",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-pit-1991-80-350": {
+    "doc_id": null,
+    "title": "Ustawa o podatku dochodowym od osób fizycznych (PIT)",
+    "domain": "finance",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-cit-1992-21-86": {
+    "doc_id": null,
+    "title": "Ustawa o podatku dochodowym od osób prawnych (CIT)",
+    "domain": "finance",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-vat-2004-54-535": {
+    "doc_id": null,
+    "title": "Ustawa o podatku od towarów i usług (VAT)",
+    "domain": "finance",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ordynacja-podatkowa-1997-137-926": {
+    "doc_id": null,
+    "title": "Ordynacja podatkowa",
+    "domain": "finance",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-podatek-nieruchomosci-1991-9-31": {
+    "doc_id": "pi-cmpn0d92f03uf01qyo7dg2tpp",
+    "title": "Ustawa o podatkach i opłatach lokalnych",
+    "domain": "finance",
+    "pages": 40
+  },
+  "ustawa-rachunkowosc-1994-121-591": {
+    "doc_id": null,
+    "title": "Ustawa o rachunkowości",
+    "domain": "finance",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-minimalne-wynagrodzenie-2002-200-1679": {
+    "doc_id": "pi-cmpn0dm1003uh01qyyvfjx1z7",
+    "title": "Ustawa o minimalnym wynagrodzeniu za pracę",
+    "domain": "labor",
+    "pages": 11
+  },
+  "ustawa-urlopy-rodzicielskie-2013-675": {
+    "doc_id": null,
+    "title": "Ustawa o zmianie ustawy — Kodeks pracy (urlopy rodzicielskie)",
+    "domain": "labor",
+    "pages": null,
+    "error": "Client error '400 Bad Request' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+  },
+  "ustawa-zasilki-1999-60-636": {
+    "doc_id": "pi-cmpn0dyxi03ui01qy1duw1h6m",
+    "title": "Ustawa o świadczeniach pieniężnych z ubezpieczenia społecznego",
+    "domain": "labor",
+    "pages": 60
+  },
+  "ustawa-zwiazki-zawodowe-1991-55-234": {
+    "doc_id": "pi-cmpn0ebp803uj01qydn66v7jy",
+    "title": "Ustawa o związkach zawodowych",
+    "domain": "labor",
+    "pages": 29
+  },
+  "ustawa-pomoc-spoleczna-2004-64-593": {
+    "doc_id": null,
+    "title": "Ustawa o pomocy społecznej",
+    "domain": "labor",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-swiadczenia-zdrowotne-2004-210-2135": {
+    "doc_id": null,
+    "title": "Ustawa o świadczeniach opieki zdrowotnej finansowanych ze środków publicznych",
+    "domain": "health",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "prawo-farmaceutyczne-2001-126-1381": {
+    "doc_id": null,
+    "title": "Prawo farmaceutyczne",
+    "domain": "health",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-ochrona-zdrowia-psychicznego-1994-111-535": {
+    "doc_id": null,
+    "title": "Ustawa o ochronie zdrowia psychicznego",
+    "domain": "health",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-zawody-lekarza-1996-28-152": {
+    "doc_id": null,
+    "title": "Ustawa o zawodach lekarza i lekarza dentysty",
+    "domain": "health",
+    "pages": null,
+    "error": "Client error '400 Bad Request' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+  },
+  "ustawa-oze-2015-478": {
+    "doc_id": null,
+    "title": "Ustawa o odnawialnych źródłach energii",
+    "domain": "climate",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "prawo-energetyczne-1997-54-348": {
+    "doc_id": null,
+    "title": "Prawo energetyczne",
+    "domain": "climate",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-efektywnosc-energetyczna-2016-831": {
+    "doc_id": null,
+    "title": "Ustawa o efektywności energetycznej",
+    "domain": "climate",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-elektromobilnosc-2018-317": {
+    "doc_id": null,
+    "title": "Ustawa o elektromobilności i paliwach alternatywnych",
+    "domain": "climate",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-emisje-co2-2015-1223": {
+    "doc_id": null,
+    "title": "Ustawa o systemie handlu uprawnieniami do emisji gazów cieplarnianych",
+    "domain": "climate",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "kpc-1964-43-296": {
+    "doc_id": null,
+    "title": "Kodeks postępowania cywilnego",
+    "domain": "justice",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "kpk-1997-89-555": {
+    "doc_id": null,
+    "title": "Kodeks postępowania karnego",
+    "domain": "justice",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-tk-2015-1064": {
+    "doc_id": null,
+    "title": "Ustawa o Trybunale Konstytucyjnym",
+    "domain": "justice",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "prawo-oswiatowe-2017-59": {
+    "doc_id": null,
+    "title": "Prawo oświatowe",
+    "domain": "education",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "prawo-szkolnictwo-wyzsze-2018-1668": {
+    "doc_id": null,
+    "title": "Ustawa Prawo o szkolnictwie wyższym i nauce",
+    "domain": "education",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-system-oswiaty-1991-95-425": {
+    "doc_id": null,
+    "title": "Ustawa o systemie oświaty",
+    "domain": "education",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-ustroj-rolny-2003-64-592": {
+    "doc_id": null,
+    "title": "Ustawa o kształtowaniu ustroju rolnego",
+    "domain": "agriculture",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-krus-1990-71-422": {
+    "doc_id": null,
+    "title": "Ustawa o ubezpieczeniu społecznym rolników",
+    "domain": "agriculture",
+    "pages": null,
+    "error": "Client error '400 Bad Request' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+  },
+  "ustawa-grunty-rolne-1995-16-78": {
+    "doc_id": null,
+    "title": "Ustawa o ochronie gruntów rolnych i leśnych",
+    "domain": "agriculture",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-obrona-ojczyzny-2022-2305": {
+    "doc_id": null,
+    "title": "Ustawa o obronie Ojczyzny",
+    "domain": "defense",
+    "pages": null,
+    "error": "Client error '400 Bad Request' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+  },
+  "ustawa-cudzoziemcy-2013-1650": {
+    "doc_id": null,
+    "title": "Ustawa o cudzoziemcach",
+    "domain": "foreign",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-cyberbezpieczenstwo-2018-1560": {
+    "doc_id": null,
+    "title": "Ustawa o krajowym systemie cyberbezpieczeństwa",
+    "domain": "digital",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-ochrona-danych-2018-1000": {
+    "doc_id": null,
+    "title": "Ustawa o ochronie danych osobowych (RODO implementacja PL)",
+    "domain": "digital",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "prawo-telekomunikacyjne-2004-171-1800": {
+    "doc_id": null,
+    "title": "Prawo telekomunikacyjne",
+    "domain": "digital",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "prawo-budowlane-1994-89-414": {
+    "doc_id": null,
+    "title": "Prawo budowlane",
+    "domain": "infrastructure",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-transport-drogowy-2001-125-1371": {
+    "doc_id": null,
+    "title": "Ustawa o transporcie drogowym",
+    "domain": "infrastructure",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-transport-zbiorowy-2010-106-1191": {
+    "doc_id": null,
+    "title": "Ustawa o publicznym transporcie zbiorowym",
+    "domain": "infrastructure",
+    "pages": null,
+    "error": "Client error '400 Bad Request' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+  },
+  "ustawa-dzialalnosc-kulturalna-1991-114-493": {
+    "doc_id": null,
+    "title": "Ustawa o organizowaniu i prowadzeniu działalności kulturalnej",
+    "domain": "culture",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-sport-2010-127-857": {
+    "doc_id": null,
+    "title": "Ustawa o sporcie",
+    "domain": "sport",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-pan-1960-54-271": {
+    "doc_id": null,
+    "title": "Ustawa o Polskiej Akademii Nauk",
+    "domain": "science",
+    "pages": null,
+    "error": "Client error '400 Bad Request' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+  },
+  "ustawa-polityka-rozwoju-2006-227-1658": {
+    "doc_id": null,
+    "title": "Ustawa o zasadach prowadzenia polityki rozwoju",
+    "domain": "regional",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-mienie-panstwowe-2016-154": {
+    "doc_id": null,
+    "title": "Ustawa o zasadach zarządzania mieniem państwowym",
+    "domain": "stateassets",
+    "pages": null,
+    "error": "Client error '400 Bad Request' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+  },
+  "ustawa-policja-1990-30-179": {
+    "doc_id": null,
+    "title": "Ustawa o Policji",
+    "domain": "interior",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-straz-graniczna-1990-78-462": {
+    "doc_id": null,
+    "title": "Ustawa o Straży Granicznej",
+    "domain": "interior",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-usligi-turystyczne-1997-133-884": {
+    "doc_id": null,
+    "title": "Ustawa o usługach turystycznych",
+    "domain": "sport",
+    "pages": null,
+    "error": "Client error '403 Forbidden' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+  },
+  "ustawa-zamowienia-publiczne-2019-2019": {
+    "doc_id": null,
+    "title": "Ustawa Prawo zamówień publicznych",
+    "domain": "stateassets",
+    "pages": null,
+    "error": "Client error '400 Bad Request' for url 'https://api.pageindex.ai/doc'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+  },
+  "konstytucja-rp-isap-1997-78-483": {
+    "doc_id": "pi-cmpmnqmr003ou01qybe7fhgh8",
+    "title": "Konstytucja Rzeczypospolitej Polskiej",
+    "domain": "",
+    "pages": 56
+  }
+}

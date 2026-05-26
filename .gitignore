@@ -7,7 +7,8 @@ __pycache__/
 .ruff_cache/
 node_modules/
 sessions/
-data/
+data/*
+!data/doc_manifest.json
 *.db
 .DS_Store
 dist/
