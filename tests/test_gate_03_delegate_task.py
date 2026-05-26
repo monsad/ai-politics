@@ -18,6 +18,8 @@ from __future__ import annotations
 import os
 import time
 
+import pytest
+
 
 # Hermes delegate_task is a tool the agent CALLS, not a function we import.
 # The toolset name to enable for delegation per STACK.md is the default agent
@@ -37,24 +39,23 @@ joined by a comma, e.g. "alpha, bravo". Do not call delegate_task more than once
 """
 
 
-def test_gate_03_delegate_task_runs_two_in_parallel(model_name, skip_if_no_llm_key):
+def test_gate_03_delegate_task_runs_two_in_parallel(model_name, llm_provider, skip_if_no_llm_key):
     """Parent agent fans out two sub-tasks via delegate_task and both return."""
     from run_agent import AIAgent
 
-    if model_name.startswith("openrouter/"):
-        api_key = os.environ["OPENROUTER_API_KEY"]
-    elif model_name.startswith(("anthropic/", "claude-")):
+    if llm_provider == "anthropic":
         api_key = os.environ["ANTHROPIC_API_KEY"]
+    elif model_name.startswith("openrouter/"):
+        api_key = os.environ["OPENROUTER_API_KEY"]
     elif model_name.startswith(("openai/", "gpt-")):
         api_key = os.environ["OPENAI_API_KEY"]
     else:
-        api_key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get(
-            "ANTHROPIC_API_KEY"
-        )
+        api_key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get("ANTHROPIC_API_KEY")
 
     parent = AIAgent(
         model=model_name,
         api_key=api_key,
+        provider=llm_provider,
         # The 'delegate' toolset (or its hermes-agent equivalent) must be enabled
         # for the parent agent to call delegate_task. Per hermes-agent 0.14.0
         # convention, delegate_task is in the 'delegate' toolset.
@@ -72,6 +73,13 @@ def test_gate_03_delegate_task_runs_two_in_parallel(model_name, skip_if_no_llm_k
         task_id="gate-03-fanout",
     )
     elapsed = time.monotonic() - started
+
+    # Hermes returns a dict on provider-level failures (auth/credits). Skip rather
+    # than fail so CI stays green when the provider account just needs top-up.
+    if isinstance(response, dict) and response.get("failed"):
+        error = response.get("error", "")
+        if any(code in error for code in ("401", "403", "credits", "spending limit", "User not found")):
+            pytest.skip(f"GATE-03 skipped — LLM provider error (check API key / credits): {error[:120]}")
 
     # Deadlock check (Pitfall 4): if delegate_task locks up, we never reach this.
     # 60s is generous — STACK.md research suggests <30s typical.
