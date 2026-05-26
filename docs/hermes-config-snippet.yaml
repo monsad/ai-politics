@@ -1,0 +1,13 @@
+# Paste this block into ~/.hermes/config.yaml under the top-level mcp_servers: key.
+# DO NOT commit ~/.hermes/config.yaml — it contains the real key.
+# This file (docs/hermes-config-snippet.yaml) is a TEMPLATE only — placeholder, not the live key.
+
+mcp_servers:
+  pageindex:
+    command: npx
+    args:
+      - "-y"
+      - "pageindex-mcp"
+    env:
+      PAGEINDEX_API_KEY: "paste-your-PAGEINDEX_API_KEY-from-.env-here"
+    timeout: 180
