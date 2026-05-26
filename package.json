@@ -1,0 +1,16 @@
+{
+  "name": "ai-politics",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Virtual Parliament — Hermes Agent Challenge entry",
+  "engines": {
+    "node": ">=20.8.1"
+  },
+  "devDependencies": {
+    "skills-ref": "0.1.5"
+  },
+  "scripts": {
+    "validate-skills": "skills-ref validate ./skills"
+  }
+}
