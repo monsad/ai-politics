@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "parliament"
+version = "0.1.0"
+description = "Virtual Parliament — multi-agent simulation of the Polish Sejm (Hermes Agent Challenge entry)"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11,<3.12"
+authors = [{ name = "Monika Sadlok" }]
+dependencies = [
+  "hermes-agent==0.14.0",
+  "typer==0.25.1",
+  "rich",
+  "fastapi",
+  "uvicorn",
+  "aiosqlite>=0.20",
+  "python-dotenv==1.2.2",
+  "httpx==0.28.1",
+  "pyyaml==6.0.3",
+  "mcp==1.27.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==8.3.4",
+  "pytest-asyncio==0.24.0",
+  "ruff==0.8.4",
+  "pre-commit==4.0.1",
+]
+
+[project.scripts]
+hermes-parliament = "parliament.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["parliament"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B"]
+ignore = ["E501"]
