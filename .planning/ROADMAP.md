@@ -50,7 +50,13 @@ Plans:
   3. Every ministry skill's `doc_search` call only returns documents tagged with that ministry's domain — Finance does not cite health regulations; tested via `doc_registry.py` assertions
   4. All 50 corpus documents are ingested; `tree_search("Konstytucja")` and `tree_search("Kodeks Karny")` each return nodes with valid Polish diacritics
   5. The Konfederacja SKILL.md has been reviewed by ≥ 2 people from different political perspectives and every party/ministry SKILL.md has an `## Output Constraints` section prohibiting real MP names and slurs
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 02-01-PLAN.md — Corpus ingest: batch seed script + ~50 docs into PageIndex Cloud (BRAIN-03, BRAIN-04)
+- [ ] 02-02-PLAN.md — Ministry template + 7 Wave 1 ministries + doc_registry.py (MIN-01..04, SKILL-01..03, BRAIN-05)
+- [ ] 02-03-PLAN.md — 5 party SKILL.md files + LLM-pair ethics review (PARTY-01..05, ETHICS-02..04, LANG-01..03)
+- [ ] 02-04-PLAN.md — 12 Wave 2 ministry SKILL.md files (MIN-01, SKILL-01..03)
+- [ ] 02-05-PLAN.md — Marszalek skill + Phase 2 acceptance tests + human checkpoint (SKILL-01..02, ORCH-01)
 **Cut criteria (Day 3 EOD)**: If 19 ministries are not complete, cut to 7 (Finance, Health, Justice, Education, Climate, Infrastructure, Foreign Affairs). If party divergence test fails, do not proceed to Phase 3.
 
 ### Phase 3: Orchestrator & CLI
