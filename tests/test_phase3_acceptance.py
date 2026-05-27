@@ -27,8 +27,44 @@ def test_disclaimer_constant():
 
 
 def test_db_schema(tmp_path):
-    """INFRA-05: tables sessions, utterances, votes, bill_drafts exist; WAL mode set."""
-    pytest.skip("Plan 02: parliament/db.py implementation")
+    """INFRA-05: tables exist; WAL mode set; helpers round-trip data."""
+    from parliament import db as pdb
+
+    db_path = tmp_path / "test.db"
+    pdb.init_db(db_path)
+
+    import sqlite3
+    con = sqlite3.connect(str(db_path))
+    try:
+        mode = con.execute("PRAGMA journal_mode").fetchone()[0]
+        assert mode.lower() == "wal", mode
+
+        tables = {row[0] for row in con.execute(
+            "SELECT name FROM sqlite_master WHERE type='table'"
+        )}
+        assert {"sessions", "utterances", "votes", "bill_drafts"}.issubset(tables), tables
+    finally:
+        con.close()
+
+    pdb.insert_session(db_path, "sess-1", "4-day work week")
+    pdb.insert_utterance(db_path, "sess-1", 1, "MARSZAŁEK", "classification", "Topic accepted.", ["n1", "n2"])
+    pdb.insert_vote(db_path, "sess-1", "KO", "FOR", 157)
+    pdb.insert_bill_draft(db_path, "sess-1", "Draft 1", "# Article 1\n...")
+    pdb.update_session(db_path, "sess-1", status="complete", vote_result="PASSED", exit_code=0, raw_output="...")
+
+    con = sqlite3.connect(str(db_path))
+    try:
+        row = con.execute("SELECT status, vote_result, exit_code, finished_at FROM sessions WHERE id=?", ("sess-1",)).fetchone()
+        assert row[0] == "complete"
+        assert row[1] == "PASSED"
+        assert row[2] == 0
+        assert row[3] is not None
+        utt = con.execute("SELECT speaker, node_ids FROM utterances WHERE session_id=?", ("sess-1",)).fetchone()
+        assert utt[0] == "MARSZAŁEK"
+        import json
+        assert json.loads(utt[1]) == ["n1", "n2"]
+    finally:
+        con.close()
 
 
 def test_token_budget_wired():
