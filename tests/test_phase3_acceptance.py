@@ -67,9 +67,21 @@ def test_db_schema(tmp_path):
         con.close()
 
 
-def test_token_budget_wired():
-    """INFRA-06: session.run_session accounts response chars against TokenBudget."""
-    pytest.skip("Plan 04: session.py token budget wiring")
+def test_token_budget_wired(monkeypatch):
+    """INFRA-06: run_session charges token budget proportional to stdout length."""
+    from parliament import session as ps
+    from parliament.guards import TokenBudget
+
+    # Stub the subprocess runner to return a fixed-size blob
+    sample_stdout = "A" * 4000  # → 1000 tokens
+    def fake_spinner(cmd, env, timeout, console=None):
+        return sample_stdout, "\nsession_id: fake-sid-1\n", 0
+    monkeypatch.setattr(ps, "_run_with_spinner", fake_spinner)
+
+    budget = TokenBudget(max_tokens=10_000)
+    result = ps.run_session("test topic", db_path=None, budget=budget)
+    assert result.estimated_tokens == 1000
+    assert budget.total == 1000
 
 
 def test_agent_factory_cmd(monkeypatch):
@@ -143,13 +155,68 @@ def test_citation_validator_smoke(monkeypatch):
 
 
 def test_reasoning_blocks_parsed():
-    """ORCH-08: parse_phases detects [MARSZAŁEK REASONING] marker."""
-    pytest.skip("Plan 04: session.parse_phases implementation")
+    """ORCH-08: parse_phases detects [MARSZAŁEK REASONING] markers."""
+    from parliament.session import parse_phases
+    text = (
+        "[MARSZAŁEK REASONING] Topic: 4-day work week [END MARSZAŁEK REASONING]\n"
+        "## Ministry Analysis\nFinance says...\n"
+        "## Party Debate — First Reading\nKO speaks...\n"
+        "## Vote\n| CR | FOR | 157 |\n"
+    )
+    phases = parse_phases(text)
+    names = [p["phase"] for p in phases]
+    assert "marszalek_reasoning" in names
+    assert "ministry_analysis" in names
+    assert "first_reading" in names
+    assert "voting" in names
 
 
-def test_markdown_export(tmp_path):
-    """CLI-03 + EXPORT-01: --export markdown writes file with all sections + disclaimers."""
-    pytest.skip("Plan 04: cli.py export wiring")
+def test_markdown_export(tmp_path, monkeypatch):
+    """CLI-03 + EXPORT-01: --export markdown writes file with required sections + disclaimers."""
+    from parliament import session as ps
+    from typer.testing import CliRunner
+    from parliament.cli import app
+
+    sample = (
+        "[MARSZAŁEK REASONING] sample [END MARSZAŁEK REASONING]\n"
+        "## Ministry Analysis\nFinance opinion.\n"
+        "## Party Debate — First Reading\nKO speaks.\n"
+        "## Vote\n"
+        "| Party | Vote | Seats |\n"
+        "|-------|------|-------|\n"
+        "| CR | FOR | 157 |\n"
+        "| NC | AGAINST | 194 |\n"
+        "| AC | FOR | 65 |\n"
+        "| Liberty Front | AGAINST | 18 |\n"
+        "| SD | FOR | 26 |\n"
+        "## Draft Bill\nArticle 1. ...\n"
+    )
+
+    def fake_spinner(cmd, env, timeout, console=None):
+        return sample, "\nsession_id: test-sid-export\n", 0
+
+    monkeypatch.setattr(ps, "_run_with_spinner", fake_spinner)
+    monkeypatch.setenv("PARLIAMENT_DB_PATH", str(tmp_path / "sessions.db"))
+    out_path = tmp_path / "output.md"
+
+    runner = CliRunner()
+    res = runner.invoke(app, ["test topic", "--export", "markdown", "-o", str(out_path)])
+    assert res.exit_code == 0, res.output
+    assert out_path.exists()
+    content = out_path.read_text(encoding="utf-8")
+
+    # EXPORT-01 sections
+    assert "Virtual Parliament Session" in content
+    assert "## Vote Tally" in content
+    assert "| CR | FOR | 157 |" in content
+    assert "## Draft Bill" in content
+    assert "Article 1" in content
+
+    # ETHICS-01: disclaimer top AND bottom
+    first_disclaimer = content.find("EDUCATIONAL SIMULATION")
+    last_disclaimer = content.rfind("EDUCATIONAL SIMULATION")
+    assert first_disclaimer != -1
+    assert last_disclaimer > first_disclaimer  # two distinct occurrences
 
 
 def test_sse_endpoint_smoke():
