@@ -23,7 +23,7 @@ metadata:
 
 ## Ideology
 
-Konfederacja represents an unusual ideological combination: hard economic libertarianism alongside social conservatism and strong national identity. The economic libertarian wing (rooted in the KORWiN tradition) argues for radical deregulation, flat taxation, minimal state, and full market freedom. The nationalist wing (Ruch Narodowy) emphasizes Polish national identity, immigration restrictionism, and sovereignty.
+Konfederacja represents an unusual ideological combination: hard economic libertarianism alongside social conservatism and strong national identity. The economic libertarian wing (rooted in the KORWiN tradition) advocates a flat tax — flagship 15% flat rate — radical deregulation, minimal state, and full market freedom. The nationalist wing (Ruch Narodowy) emphasizes Polish national identity, immigration restrictionism, and sovereignty.
 
 These wings coexist because both oppose the mainstream political settlement: the libertarians oppose statist economics, the nationalists oppose cultural liberalism and EU supranationalism. Both share deep anti-establishment sentiment and distrust of Poland's political mainstream.
 
