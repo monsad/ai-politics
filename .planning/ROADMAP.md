@@ -52,10 +52,10 @@ Plans:
   5. The Konfederacja SKILL.md has been reviewed by ≥ 2 people from different political perspectives and every party/ministry SKILL.md has an `## Output Constraints` section prohibiting real MP names and slurs
 **Plans**: 5 plans
 Plans:
-- [ ] 02-01-PLAN.md — Corpus ingest: batch seed script + ~50 docs into PageIndex Cloud (BRAIN-03, BRAIN-04)
-- [ ] 02-02-PLAN.md — Ministry template + 7 Wave 1 ministries + doc_registry.py (MIN-01..04, SKILL-01..03, BRAIN-05)
-- [ ] 02-03-PLAN.md — 5 party SKILL.md files + LLM-pair ethics review (PARTY-01..05, ETHICS-02..04, LANG-01..03)
-- [ ] 02-04-PLAN.md — 12 Wave 2 ministry SKILL.md files (MIN-01, SKILL-01..03)
+- [x] 02-01-PLAN.md — Corpus ingest: batch seed script + ~50 docs into PageIndex Cloud (BRAIN-03, BRAIN-04)
+- [x] 02-02-PLAN.md — Ministry template + 7 Wave 1 ministries + doc_registry.py (MIN-01..04, SKILL-01..03, BRAIN-05)
+- [x] 02-03-PLAN.md — 5 party SKILL.md files + LLM-pair ethics review (PARTY-01..05, ETHICS-02..04, LANG-01..03)
+- [x] 02-04-PLAN.md — 12 Wave 2 ministry SKILL.md files (MIN-01, SKILL-01..03)
 - [ ] 02-05-PLAN.md — Marszalek skill + Phase 2 acceptance tests + human checkpoint (SKILL-01..02, ORCH-01)
 **Cut criteria (Day 3 EOD)**: If 19 ministries are not complete, cut to 7 (Finance, Health, Justice, Education, Climate, Infrastructure, Foreign Affairs). If party divergence test fails, do not proceed to Phase 3.
 
@@ -70,7 +70,13 @@ Plans:
   3. `hermes parliament --minister finanse "ile kosztuje 800+"` returns a structured Finance ministry analysis in isolation in < 60 seconds
   4. `hermes parliament "test" --export markdown output.md` produces a readable Markdown file with session header, ordered utterances, vote tally table, and draft bill section
   5. `[MARSZAŁEK REASONING]` blocks appear in the transcript at every ministry-selection and routing decision; every session output begins with the educational disclaimer
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 03-01-PLAN.md — Wave 0: pyproject.toml entry-point fix + stub modules + acceptance test file (CLI-05)
+- [ ] 03-02-PLAN.md — SQLite schema + WAL + write helpers (INFRA-05)
+- [ ] 03-03-PLAN.md — agent_factory.py + citation_validator.py (INFRA-04, ORCH-09)
+- [ ] 03-04-PLAN.md — session.py + cli.py: subprocess Hermes, rich Live, export, disclaimer, token budget (CLI-01..04, EXPORT-01, ETHICS-01, ORCH-01, ORCH-08, INFRA-06)
+- [ ] 03-05-PLAN.md — FastAPI SSE endpoint + slow E2E acceptance on 3 topics + checkpoints (ORCH-02..07, CLI-05)
 **Cut criteria (Day 3 23:00)**: If CLI E2E is not passing: (1) cut Phase 4 Next.js entirely, (2) cut to 7 ministries, (3) cut second reading. Do not start Phase 4 with a broken CLI.
 
 ### Phase 4: Web & Demo Prep
