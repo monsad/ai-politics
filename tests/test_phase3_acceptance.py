@@ -219,9 +219,42 @@ def test_markdown_export(tmp_path, monkeypatch):
     assert last_disclaimer > first_disclaimer  # two distinct occurrences
 
 
-def test_sse_endpoint_smoke():
-    """INFRA-04 (api): GET /stream/{session_id} returns 200 with text/event-stream content type."""
-    pytest.skip("Plan 05: api.py SSE endpoint")
+def test_sse_endpoint_smoke(tmp_path, monkeypatch):
+    """INFRA-04 (api side): /stream/{session_id} returns 200 text/event-stream and emits utterance + status."""
+    from fastapi.testclient import TestClient
+    from parliament import db as pdb
+    import os
+
+    db_path = tmp_path / "sessions.db"
+    monkeypatch.setenv("PARLIAMENT_DB_PATH", str(db_path))
+
+    # Import api AFTER setting env so _db_path picks up override
+    from parliament.api import app as api_app
+
+    pdb.init_db(db_path)
+    pdb.insert_session(db_path, "sse-test-1", "OZE expansion")
+    pdb.insert_utterance(db_path, "sse-test-1", 1, "KO", "first_reading", "We support OZE.", ["n1"])
+    pdb.insert_utterance(db_path, "sse-test-1", 2, "PiS", "first_reading", "We oppose.", [])
+    pdb.update_session(db_path, "sse-test-1", status="complete", vote_result="PASSED")
+
+    with TestClient(api_app) as client:
+        r = client.get("/health")
+        assert r.status_code == 200
+        assert r.json() == {"status": "ok"}
+
+        r = client.get("/stream/sse-test-1")
+        assert r.status_code == 200
+        assert r.headers["content-type"].startswith("text/event-stream")
+        body = r.text
+        assert "event: utterance" in body
+        assert "event: status" in body
+        assert "first_reading" in body
+        assert '"vote_result": "PASSED"' in body or "PASSED" in body
+
+        # Unknown session_id
+        r = client.get("/stream/nonexistent")
+        assert r.status_code == 200
+        assert "not_found" in r.text
 
 
 @pytest.mark.slow
