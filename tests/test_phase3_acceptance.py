@@ -107,9 +107,39 @@ def test_agent_factory_cmd(monkeypatch):
         build_hermes_cmd("marszalek-sejmu", "x", tier="invalid")  # type: ignore[arg-type]
 
 
-def test_citation_validator_smoke():
-    """ORCH-09: validate_citations returns dict with required keys on empty input."""
-    pytest.skip("Plan 03: citation_validator.py implementation")
+def test_citation_validator_smoke(monkeypatch):
+    """ORCH-09 support: extract_node_ids parses both citation styles;
+    validate_citations returns the contract dict shape with no API key."""
+    from parliament.citation_validator import extract_node_ids, validate_citations
+    import asyncio
+
+    sample = (
+        "Konstytucja Art. 32 (orig. PL: \"Wszyscy są wobec prawa równi\" — konstytucja.pdf p.5)\n"
+        "Per node_id: abc123 the right to dignity applies.\n"
+        "See also kodeks-pracy.pdf p.12-15 on labor rights.\n"
+        "Repeated reference: node_id: abc123 — should not duplicate.\n"
+    )
+    tokens = extract_node_ids(sample)
+    # Expect three unique tokens: konstytucja.pdf#p5, abc123, kodeks-pracy.pdf#p12-15
+    assert "abc123" in tokens
+    assert "konstytucja.pdf#p5" in tokens
+    assert "kodeks-pracy.pdf#p12-15" in tokens
+    assert len(tokens) == 3  # de-duped
+
+    # Without API key, validate returns the contract shape + error
+    monkeypatch.delenv("PAGEINDEX_API_KEY", raising=False)
+    result = asyncio.run(validate_citations(tokens))
+    assert set(result.keys()) >= {"total", "resolved", "unresolvable"}
+    assert result["total"] == 3
+    assert result["resolved"] == 0
+    assert len(result["unresolvable"]) == 3
+    assert result.get("error") == "PAGEINDEX_API_KEY missing"
+
+    # Empty input → empty result
+    empty = asyncio.run(validate_citations([]))
+    assert empty == {"total": 0, "resolved": 0, "unresolvable": []} or (
+        empty["total"] == 0 and empty["resolved"] == 0 and empty["unresolvable"] == []
+    )
 
 
 def test_reasoning_blocks_parsed():
