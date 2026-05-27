@@ -17,7 +17,8 @@ dependencies = [
   "fastapi",
   "uvicorn",
   "aiosqlite>=0.20",
-  "python-dotenv==1.2.2",
+  "sse-starlette>=3.0",
+  "python-dotenv==1.2.1",
   "httpx==0.28.1",
   "pyyaml==6.0.3",
   "mcp==1.27.1",
@@ -32,7 +33,7 @@ dev = [
 ]
 
 [project.scripts]
-hermes-parliament = "parliament.cli:app"
+parliament = "parliament.cli:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["parliament"]
@@ -40,6 +41,7 @@ packages = ["parliament"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+markers = ["slow: end-to-end tests that spawn the hermes subprocess"]
 
 [tool.ruff]
 line-length = 100
