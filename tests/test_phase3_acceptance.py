@@ -72,9 +72,39 @@ def test_token_budget_wired():
     pytest.skip("Plan 04: session.py token budget wiring")
 
 
-def test_agent_factory_cmd():
-    """INFRA-04: build_hermes_cmd returns expected argv for marszalek-sejmu."""
-    pytest.skip("Plan 03: agent_factory.py implementation")
+def test_agent_factory_cmd(monkeypatch):
+    """INFRA-04: build_hermes_cmd returns verified argv; env carries flags."""
+    from parliament.agent_factory import build_hermes_cmd, build_hermes_env
+
+    cmd = build_hermes_cmd("marszalek-sejmu", "4-day work week")
+    assert cmd == [
+        "hermes", "chat",
+        "-s", "marszalek-sejmu",
+        "-q", "4-day work week",
+        "-Q", "--accept-hooks", "--yolo",
+    ]
+
+    cmd2 = build_hermes_cmd("ministry-finansow", "ile kosztuje 800+", tier="ministry")
+    assert cmd2[3] == "ministry-finansow"
+    assert cmd2[5] == "ile kosztuje 800+"
+
+    # Topic injection: the topic is one argv element regardless of shell chars
+    cmd3 = build_hermes_cmd("marszalek-sejmu", "tax; rm -rf /")
+    assert cmd3[5] == "tax; rm -rf /"
+    assert "shell" not in " ".join(cmd3).lower()
+
+    env = build_hermes_env("orchestrator")
+    assert env["HERMES_YOLO_MODE"] == "1"
+    assert env["HERMES_ACCEPT_HOOKS"] == "1"
+
+    # Tier model override
+    monkeypatch.setenv("PARLIAMENT_MODEL_MINISTRY", "hermes-3-8b")
+    env2 = build_hermes_env("ministry")
+    assert env2.get("HERMES_MODEL") == "hermes-3-8b"
+
+    import pytest as _pytest
+    with _pytest.raises(ValueError):
+        build_hermes_cmd("marszalek-sejmu", "x", tier="invalid")  # type: ignore[arg-type]
 
 
 def test_citation_validator_smoke():
