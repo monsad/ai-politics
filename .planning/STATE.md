@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-05-26)
 Phase: 1 of 5 (Foundation & Smoke Tests)
 Plan: 0 of TBD in current phase
 Status: Ready to execute
-Last activity: 2026-05-27 -- Phase 3 planning complete
+Last activity: 2026-05-28 - Completed quick task 260528-ea6: install agent-cli and build web search agent
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -68,6 +68,12 @@ Recent decisions affecting current work:
 ### Pending Todos
 
 None yet.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260528-ea6 | install agent-cli and build web search agent | 2026-05-28 | fc257dc | [260528-ea6-install-agent-cli-and-build-web-search-a](.planning/quick/260528-ea6-install-agent-cli-and-build-web-search-a/) |
 
 ### Blockers/Concerns
 
