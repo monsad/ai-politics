@@ -16,3 +16,18 @@ build/
 *.egg-info/
 .coverage
 htmlcov/
+
+# Agent runtime artifacts
+.claude/worktrees/
+.cora/
+
+# Hermes session stdout artifacts (saved by skills during runs)
+/ko-*.md
+/mf-*.md
+/mrips-*.md
+/mrit-*.md
+/pis-*.md
+/td-*.md
+/td-*.txt
+/prd.md
+
