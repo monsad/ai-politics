@@ -31,3 +31,5 @@ htmlcov/
 /td-*.txt
 /prd.md
 
+sessions.db-shm
+sessions.db-wal
