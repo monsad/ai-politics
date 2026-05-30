@@ -18,7 +18,8 @@ build/
 htmlcov/
 
 # Agent runtime artifacts
-.claude/worktrees/
+.claude/
+.planning/
 .cora/
 
 # Hermes session stdout artifacts (saved by skills during runs)
