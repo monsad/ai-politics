@@ -21,6 +21,8 @@ Every argument cites a real legal source — articles of the Constitution, Labou
 
 ## Demo
 
+![Virtual Parliament — live chamber view with the four-day work week bill passing 248:212, AI thought process panel, vote tally and ministry analyses](https://raw.githubusercontent.com/monsad/ai-politics/main/docs/screenshots/chamber-overview.png)
+
 🎥 **Video walkthrough**: <https://www.loom.com/share/92cdac7da31c471088a4e569b0cfe1ed>
 🔗 **Live deployment**: <https://web-production-53027.up.railway.app/>
 
