@@ -23,7 +23,6 @@ from parliament.db import (
 )
 from parliament.guards import TokenBudget, TokenBudgetExceeded
 
-
 PARTY_SEATS = {"KO": 157, "PiS": 194, "TD": 65, "Konfederacja": 18, "Lewica": 26}
 
 PHASE_MARKERS = [
@@ -64,7 +63,6 @@ DISCLAIMER = (
     "endorsement, or prediction of real parliamentary outcomes."
 )
 
-
 @dataclass
 class SessionResult:
     session_id: Optional[str]
@@ -77,14 +75,10 @@ class SessionResult:
     bill_draft: Optional[str] = None
     estimated_tokens: int = 0
 
-
-# ------------------------------------------------------------------ parsing
-
 def extract_hermes_session_id(stderr: str) -> Optional[str]:
     """Extract the session_id emitted by Hermes to stderr: `\nsession_id: <id>`."""
     m = re.search(r"session_id:\s*(\S+)", stderr)
     return m.group(1) if m else None
-
 
 def parse_phases(text: str) -> list[dict]:
     """Segment the Hermes stdout blob into phase sections by marker offset."""
@@ -95,18 +89,15 @@ def parse_phases(text: str) -> list[dict]:
             sections.append({"phase": phase_id, "marker": marker, "offset": idx})
             idx += len(marker)
     sections.sort(key=lambda x: x["offset"])
-    # attach content slice = from this offset to the next section's offset
     for i, sec in enumerate(sections):
         end = sections[i + 1]["offset"] if i + 1 < len(sections) else len(text)
         sec["content"] = text[sec["offset"]:end]
     return sections
 
-
 _VOTE_LINE = re.compile(
     r"^\|\s*(KO|PiS|TD|Konfederacja|Lewica)\s*\|\s*(FOR|AGAINST|ABSTAIN)\s*\|",
     re.MULTILINE,
 )
-
 
 def parse_vote_table(text: str) -> tuple[dict[str, str], Optional[str]]:
     """Parse the markdown vote table, compute weighted seat tally → PASSED | REJECTED."""
@@ -120,22 +111,17 @@ def parse_vote_table(text: str) -> tuple[dict[str, str], Optional[str]]:
     result = "PASSED" if total_for > total_against else "REJECTED"
     return votes, result
 
-
 def parse_bill_draft(text: str) -> Optional[str]:
     """Extract the bill draft section between `## Draft Bill` and closing disclaimer."""
     marker = "## Draft Bill"
     idx = text.find(marker)
     if idx == -1:
         return None
-    # End at trailing disclaimer or end of text
     tail = text[idx + len(marker):]
     end_idx = tail.find("⚠️")
     body = tail[:end_idx] if end_idx != -1 else tail
     body = body.strip()
     return body or None
-
-
-# ------------------------------------------------------------------ subprocess
 
 def _spawn(cmd: list[str], env: dict[str, str], timeout: int) -> tuple[str, str, int]:
     """Launch subprocess, capture stdout+stderr in background threads."""
@@ -145,7 +131,7 @@ def _spawn(cmd: list[str], env: dict[str, str], timeout: int) -> tuple[str, str,
         stderr=subprocess.PIPE,
         text=True,
         encoding="utf-8",
-        shell=False,  # SECURITY: never True; cmd is argv list from build_hermes_cmd
+        shell=False,
         env=env,
     )
     stdout_buf: list[str] = []
@@ -163,7 +149,6 @@ def _spawn(cmd: list[str], env: dict[str, str], timeout: int) -> tuple[str, str,
     t_err.join(timeout=5)
     return "".join(stdout_buf), "".join(stderr_buf), proc.returncode or 0
 
-
 def _phase_label_for_elapsed(elapsed: float) -> str:
     """Return a human-readable spinner label based on elapsed seconds."""
     if elapsed < 20:
@@ -177,7 +162,6 @@ def _phase_label_for_elapsed(elapsed: float) -> str:
     if elapsed < 280:
         return "Voting..."
     return "Drafting bill..."
-
 
 def _run_with_spinner(
     cmd: list[str], env: dict[str, str], timeout: int,
@@ -206,9 +190,6 @@ def _run_with_spinner(
         worker.join(timeout=5)
     return result["out"], result["err"], result["rc"]
 
-
-# ------------------------------------------------------------------ persistence
-
 def _persist(db_path: Path | str, topic: str, sr: SessionResult) -> None:
     """Write all session data to SQLite after subprocess completes."""
     if sr.session_id is None:
@@ -235,9 +216,6 @@ def _persist(db_path: Path | str, topic: str, sr: SessionResult) -> None:
         exit_code=sr.returncode,
     )
 
-
-# ------------------------------------------------------------------ public API
-
 def run_session(
     topic: str, *,
     db_path: Path | str | None = None,
@@ -259,7 +237,7 @@ def run_session(
     try:
         budget.add(est_tokens)
     except TokenBudgetExceeded:
-        pass  # budget tracking is reporting-only here; session already ran
+        pass
 
     result = SessionResult(
         session_id=sid, stdout=stdout, stderr=stderr, returncode=rc,
@@ -269,7 +247,6 @@ def run_session(
     if db_path is not None:
         _persist(db_path, topic, result)
     return result
-
 
 def run_minister_isolation(
     domain: str, question: str, *,
@@ -301,9 +278,6 @@ def run_minister_isolation(
         insert_utterance(db_path, sid, 1, speaker=skill.upper(), phase="ministry_analysis", content=stdout[:32000])
         update_session(db_path, sid, status="complete" if rc == 0 else "error", raw_output=stdout, exit_code=rc)
     return result
-
-
-# ------------------------------------------------------------------ markdown export
 
 def render_markdown(result: SessionResult, topic: str) -> str:
     """Render a full markdown export: disclaimer + transcript + vote tally + bill draft."""

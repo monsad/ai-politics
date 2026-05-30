@@ -9,10 +9,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-
 class TokenBudgetExceeded(Exception):
     """Raised when a token addition would push cumulative usage past the cap."""
-
 
 @dataclass
 class TokenBudget:

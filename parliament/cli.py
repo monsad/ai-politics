@@ -20,17 +20,8 @@ from parliament.session import (
 
 app = typer.Typer(add_completion=False, help="Virtual Parliament — Polish Sejm simulation.")
 
-
 def _db_path() -> Path:
     return Path(os.environ.get("PARLIAMENT_DB_PATH", "sessions.db"))
-
-
-# NOTE: @app.callback() is intentionally not registered here.
-# Adding @app.callback() to a single-command typer app creates a click Group,
-# which makes positional arguments on the callback fail at parse time.
-# This is a known click/typer architectural constraint (groups cannot have
-# positional ARGUMENT parameters). The @app.callback pattern is reserved for
-# when subcommands (e.g. `parliament session`, `parliament export`) are added.
 
 @app.command()
 def main(
@@ -59,7 +50,6 @@ def main(
     else:
         result = run_session(topic, db_path=_db_path(), console=console)
         console.print(result.stdout)
-        # Print vote tally summary
         console.print()
         console.print("## Vote Tally")
         console.print("| Party | Vote | Seats |")
