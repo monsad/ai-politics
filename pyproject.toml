@@ -18,7 +18,7 @@ dependencies = [
   "uvicorn",
   "aiosqlite>=0.20",
   "sse-starlette>=3.0",
-  "python-dotenv==1.2.1",
+  "python-dotenv==1.2.2",
   "httpx==0.28.1",
   "pyyaml==6.0.3",
   "mcp==1.27.1",
