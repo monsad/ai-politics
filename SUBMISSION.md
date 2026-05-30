@@ -120,7 +120,7 @@ Here's the shape:
                          ▼   5 × party debate, ×2 readings
                   ┌──────────────┐
                   │ CR  NC  AC  │
-                  │ Konf  SD │
+                  │ LF  SD       │
                   └──────┬───────┘
                          ▼
                   Seat-weighted vote → Draft bill

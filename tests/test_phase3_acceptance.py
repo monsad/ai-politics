@@ -187,7 +187,7 @@ def test_markdown_export(tmp_path, monkeypatch):
         "| CR | FOR | 157 |\n"
         "| NC | AGAINST | 194 |\n"
         "| AC | FOR | 65 |\n"
-        "| Liberty Front | AGAINST | 18 |\n"
+        "| LF | AGAINST | 18 |\n"
         "| SD | FOR | 26 |\n"
         "## Draft Bill\nArticle 1. ...\n"
     )
@@ -291,10 +291,10 @@ def test_full_simulation_4day_work_week(tmp_path, monkeypatch):
     assert "## Vote" in result.stdout
 
     assert result.vote_result in {"PASSED", "REJECTED"}
-    assert set(result.votes.keys()) >= {"CR", "NC", "AC", "Liberty Front", "SD"}
+    assert set(result.votes.keys()) >= {"CR", "NC", "AC", "LF", "SD"}
 
-    assert result.votes["SD"] != result.votes["Liberty Front"], (
-        f"Coherence failure: SD={result.votes['SD']}, Liberty Front={result.votes['Liberty Front']}"
+    assert result.votes["SD"] != result.votes["LF"], (
+        f"Coherence failure: SD={result.votes['SD']}, LF={result.votes['LF']}"
     )
 
     tokens = extract_node_ids(result.stdout)

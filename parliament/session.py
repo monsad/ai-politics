@@ -23,7 +23,7 @@ from parliament.db import (
 )
 from parliament.guards import TokenBudget, TokenBudgetExceeded
 
-PARTY_SEATS = {"CR": 157, "NC": 194, "AC": 65, "Liberty Front": 18, "SD": 26}
+PARTY_SEATS = {"CR": 157, "NC": 194, "AC": 65, "LF": 18, "SD": 26}
 
 PHASE_MARKERS = [
     ("[MARSZAŁEK REASONING]", "marszalek_reasoning"),
@@ -95,7 +95,7 @@ def parse_phases(text: str) -> list[dict]:
     return sections
 
 _VOTE_LINE = re.compile(
-    r"^\|\s*(CR|NC|AC|Liberty Front|SD)\s*\|\s*(FOR|AGAINST|ABSTAIN)\s*\|",
+    r"^\|\s*(CR|NC|AC|LF|SD)\s*\|\s*(FOR|AGAINST|ABSTAIN)\s*\|",
     re.MULTILINE,
 )
 

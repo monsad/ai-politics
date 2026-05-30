@@ -21,11 +21,11 @@ type Party = {
 };
 
 const PARTIES: Party[] = [
-  { id: "CR",           label: "Civic Coalition (CR)",            short: "CR",           hex: "#f59e0b", seats: 157 },
-  { id: "NC",          label: "Law and Justice (NC)",           short: "NC",          hex: "#1d4ed8", seats: 194 },
-  { id: "AC",           label: "Third Way (AC)",                  short: "AC",           hex: "#ca8a04", seats:  65 },
-  { id: "Liberty Front", label: "Confederation (Liberty Front)",    short: "Confederation",hex: "#0f172a", seats:  18 },
-  { id: "SD",       label: "The Left (Social Democrats)",          short: "The Left",     hex: "#dc2626", seats:  26 },
+  { id: "CR", label: "Civic Reform",          short: "CR", hex: "#f59e0b", seats: 157 },
+  { id: "NC", label: "National Conservatives", short: "NC", hex: "#1d4ed8", seats: 194 },
+  { id: "AC", label: "Agrarian Center",        short: "AC", hex: "#ca8a04", seats:  65 },
+  { id: "LF", label: "LF",          short: "LF", hex: "#0f172a", seats:  18 },
+  { id: "SD", label: "SD",       short: "SD", hex: "#dc2626", seats:  26 },
 ];
 
 const TOTAL_SEATS = PARTIES.reduce((s, p) => s + p.seats, 0);
@@ -88,7 +88,7 @@ const PHASE_LABEL: Record<string, string> = {
 
 function parseVoteTable(content: string): Record<string, string> {
   const out: Record<string, string> = {};
-  const re = /\|\s*(CR|NC|AC|Liberty Front|SD)\s*\|\s*(FOR|AGAINST|ABSTAIN|ZA|PRZECIW|WSTRZYMANIE)/gi;
+  const re = /\|\s*(CR|NC|AC|LF|SD)\s*\|\s*(FOR|AGAINST|ABSTAIN|ZA|PRZECIW|WSTRZYMANIE)/gi;
   let m: RegExpExecArray | null;
   while ((m = re.exec(content)) !== null) {
     const norm = m[2].toUpperCase()
@@ -179,7 +179,7 @@ function generateSocialMedia(topic: string, partyVotes: Record<string, string>) 
     CR: { za: [`Finally a real step forward! ${topic} = modern Poland in action. 💪`], przeciw: [`${topic} without a cost analysis is populism. NO.`] },
     NC: { za: [`${topic} is our achievement. Solidarity Poland! 🇵🇱`], przeciw: [`${topic} = attack on the Polish model. We will NOT allow it!`] },
     AC: { za: [`Third Way: common sense. ${topic} for the countryside and small towns. 🌾`], przeciw: [`${topic} ignores rural Poland.`] },
-    Liberty Front: { za: [`Free market wins. ${topic} = less state! ✊`], przeciw: [`${topic} = statism. NO!`] },
+    "LF": { za: [`Free market wins. ${topic} = less state! ✊`], przeciw: [`${topic} = statism. NO!`] },
     SD: { za: [`${topic} is a step toward equality. 🌹`], przeciw: [`${topic} leaves the weakest behind. NO.`] },
   };
   for (const p of PARTIES) {
@@ -204,7 +204,7 @@ function generateSocietyAnalysis(partyVotes: Record<string, string>) {
     { label: "Middle class", icon: "💼", supportPct: Math.min(95, Math.max(15, base + (partyVotes.CR === "ZA" ? 18 : -8))) },
     { label: "Rural / farmers", icon: "🌾", supportPct: Math.min(95, Math.max(15, base + (partyVotes.AC === "ZA" ? 22 : 0) + (partyVotes.NC === "ZA" ? 12 : -5))) },
     { label: "Retirees 65+", icon: "👴", supportPct: Math.min(95, Math.max(15, base + (partyVotes.NC === "ZA" ? 28 : -15))) },
-    { label: "Entrepreneurs", icon: "🏢", supportPct: Math.min(95, Math.max(15, base + (partyVotes.Liberty Front === "ZA" ? 18 : 0) + (partyVotes.CR === "ZA" ? 8 : 0))) },
+    { label: "Entrepreneurs", icon: "🏢", supportPct: Math.min(95, Math.max(15, base + (partyVotes.LF === "ZA" ? 18 : 0) + (partyVotes.CR === "ZA" ? 8 : 0))) },
     { label: "Wage workers", icon: "👷", supportPct: Math.min(95, Math.max(15, base + (partyVotes.SD === "ZA" ? 28 : -10))) },
   ].map((g) => ({ ...g, mood: g.supportPct > 55 ? "support" as const : g.supportPct < 40 ? "against" as const : "neutral" as const }));
 }

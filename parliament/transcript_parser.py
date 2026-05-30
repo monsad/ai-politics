@@ -21,7 +21,7 @@ from __future__ import annotations
 import re
 from typing import Iterable
 
-PARTIES = ["CR", "NC", "AC", "Liberty Front", "SD"]
+PARTIES = ["CR", "NC", "AC", "LF", "SD"]
 
 _NODE_ID_RE = re.compile(r"\[node:([^\]]+)\]")
 
@@ -35,7 +35,7 @@ def _split_party_speeches(section_text: str, phase: str) -> list[dict]:
     """
     out: list[dict] = []
     pattern = re.compile(
-        r"\*\*\s*(CR|NC|AC|Liberty Front|SD)\b[^*]*\*\*",
+        r"\*\*\s*(CR|NC|AC|LF|SD)\b[^*]*\*\*",
         re.IGNORECASE,
     )
     matches = list(pattern.finditer(section_text))

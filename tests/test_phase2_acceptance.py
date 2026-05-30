@@ -102,7 +102,7 @@ def test_marszalek_has_delegate_task_authority():
 
 def test_party_divergence_profile_ko_vs_konfederacja():
     """
-    CR and Liberty Front must have visibly opposing positions on flat tax.
+    CR and LF must have visibly opposing positions on flat tax.
     Verified by text-level check — no LLM call needed.
     """
     ko = (SKILLS_DIR / "party-cr" / "SKILL.md").read_text(encoding="utf-8").lower()
@@ -118,7 +118,7 @@ def test_party_divergence_profile_ko_vs_konfederacja():
     ko_opposes = any(w in ko_context for w in ["oppos", "against", "reject", "regress"])
     assert ko_opposes, f"party-cr flat tax section should contain oppositional language. Got: {ko_context!r}"
 
-    # Liberty Front supports flat tax
+    # LF supports flat tax
     konf_flat_idx = konfederacja.find("flat tax")
     konf_context = konfederacja[konf_flat_idx:konf_flat_idx + 300]
     konf_supports = any(w in konf_context for w in ["support", "flagship", "advocate", "15%", "flat rate", "universal flat"])
