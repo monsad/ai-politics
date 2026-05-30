@@ -11,7 +11,7 @@ tags: hermesagentchallenge, devchallenge, agents
 ![Virtual Parliament — live chamber view with the four-day work week bill passing 248:212, AI thought process panel, vote tally and ministry analyses](https://raw.githubusercontent.com/monsad/ai-politics/main/docs/screenshots/chamber-overview.png)
 
 🌐 **Live:** <https://web-production-53027.up.railway.app/>
-🎥 **Walkthrough:** <https://www.loom.com/share/92cdac7da31c471088a4e569b0cfe1ed>
+🎥 **Walkthrough:** <https://www.loom.com/share/b0201270f67745baaa2945c931058b8c>
 📦 **Repo:** <https://github.com/monsad/ai-politics> (MIT)
 
 ---
@@ -38,7 +38,7 @@ This is the part of legislation that's normally invisible. **The whole point is 
 
 ## Demo
 
-🎥 **Video walkthrough (~2 min):** <https://www.loom.com/share/92cdac7da31c471088a4e569b0cfe1ed>
+🎥 **Video walkthrough (~2 min):** <https://www.loom.com/share/b0201270f67745baaa2945c931058b8c>
 
 🌐 **Live URL:** <https://web-production-53027.up.railway.app/>
 
