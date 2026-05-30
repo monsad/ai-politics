@@ -1,0 +1,24 @@
+model:
+  provider: openrouter
+  model: google/gemini-3.1-flash-lite
+providers: {}
+fallback_providers: []
+toolsets:
+  - hermes-cli
+agent:
+  max_turns: 20
+  gateway_timeout: 300
+  disabled_toolsets:
+    - browser
+    - computer-use
+    - voice
+    - terminal-modal
+display:
+  compact: true
+  streaming: false
+context:
+  engine: compressor
+delegation:
+  inherit_mcp_toolsets: false
+  child_timeout_seconds: 180
+  max_concurrent_children: 3

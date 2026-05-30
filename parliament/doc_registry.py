@@ -14,16 +14,13 @@ from pathlib import Path
 
 _MANIFEST_PATH = Path(__file__).parent.parent / "data" / "doc_manifest.json"
 
-
 def _load_manifest() -> dict:
     """Load data/doc_manifest.json if it exists, else return empty dict."""
     if _MANIFEST_PATH.exists():
         return json.loads(_MANIFEST_PATH.read_text())
     return {}
 
-
 _MANIFEST = _load_manifest()
-
 
 def _doc_ids_for_domain(domain: str) -> list[str]:
     """Extract doc_ids from manifest for a given domain."""
@@ -33,10 +30,6 @@ def _doc_ids_for_domain(domain: str) -> list[str]:
         if v.get("domain") == domain and v.get("doc_id")
     ]
 
-
-# REGISTRY: maps agent_id → {domain, doc_ids, categories}
-# doc_ids are sourced from data/doc_manifest.json at import time.
-# If manifest is not yet populated (e.g. in unit tests), doc_ids will be empty lists.
 REGISTRY: dict[str, dict] = {
     "ministry-finansow": {
         "domain": "finance",
@@ -104,7 +97,7 @@ REGISTRY: dict[str, dict] = {
         "categories": ["higher_education", "research", "academic_institutions"],
     },
     "ministry-energii": {
-        "domain": "climate",  # shares corpus with klimatu (energy law)
+        "domain": "climate",
         "doc_ids": _doc_ids_for_domain("climate"),
         "categories": ["energy_market", "grid_regulation", "energy_security"],
     },
@@ -124,7 +117,7 @@ REGISTRY: dict[str, dict] = {
         "categories": ["eu_funds", "regional_policy", "cohesion_policy"],
     },
     "ministry-rozwoju-i-technologii": {
-        "domain": "digital",  # shares digital/tech corpus
+        "domain": "digital",
         "doc_ids": _doc_ids_for_domain("digital"),
         "categories": ["economic_development", "innovation", "technology_policy"],
     },
@@ -134,7 +127,6 @@ REGISTRY: dict[str, dict] = {
         "categories": ["sports_law", "tourism", "physical_education"],
     },
 }
-
 
 def get_filter(agent_id: str) -> dict:
     """
@@ -159,7 +151,6 @@ def get_filter(agent_id: str) -> dict:
         )
     entry = REGISTRY[agent_id]
     return {"domain": entry["domain"]}
-
 
 def list_agents() -> list[str]:
     """Return sorted list of all agent_ids registered in REGISTRY."""

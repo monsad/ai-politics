@@ -50,17 +50,14 @@ CREATE TABLE IF NOT EXISTS bill_drafts (
 
 _ALLOWED_UPDATE_COLUMNS = {"status", "vote_result", "raw_output", "exit_code", "finished_at"}
 
-
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
-
 
 def _connect(db_path: Path | str) -> sqlite3.Connection:
     con = sqlite3.connect(str(db_path))
     con.execute("PRAGMA journal_mode=WAL")
     con.execute("PRAGMA foreign_keys=ON")
     return con
-
 
 def init_db(db_path: Path | str = DEFAULT_DB_PATH) -> None:
     """Create schema and enable WAL. Idempotent."""
@@ -70,7 +67,6 @@ def init_db(db_path: Path | str = DEFAULT_DB_PATH) -> None:
         con.commit()
     finally:
         con.close()
-
 
 def insert_session(db_path: Path | str, hermes_session_id: str, topic: str) -> str:
     """Insert a new session row, return hermes_session_id."""
@@ -84,7 +80,6 @@ def insert_session(db_path: Path | str, hermes_session_id: str, topic: str) -> s
     finally:
         con.close()
     return hermes_session_id
-
 
 def update_session(db_path: Path | str, session_id: str, **fields) -> None:
     """Update allowed columns on sessions row. Auto-sets finished_at on terminal status."""
@@ -103,7 +98,6 @@ def update_session(db_path: Path | str, session_id: str, **fields) -> None:
         con.commit()
     finally:
         con.close()
-
 
 def insert_utterance(
     db_path: Path | str,
@@ -127,7 +121,6 @@ def insert_utterance(
     finally:
         con.close()
 
-
 def insert_vote(
     db_path: Path | str,
     session_id: str,
@@ -147,7 +140,6 @@ def insert_vote(
         con.commit()
     finally:
         con.close()
-
 
 def insert_bill_draft(
     db_path: Path | str,

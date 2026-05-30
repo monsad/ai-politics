@@ -31,7 +31,6 @@ from typing import Any, AsyncIterator
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
-
 @dataclass
 class PageIndexClient:
     """Async client that spawns the `npx -y pageindex-mcp` subprocess and
@@ -67,9 +66,6 @@ class PageIndexClient:
         async with stdio_client(server_params) as (read, write):
             async with ClientSession(read, write) as session:
                 await session.initialize()
-                # list_tools() must be called first — the pageindex-mcp server only
-                # loads remote tools into its global registry when ListTools is handled.
-                # Calling call_tool() before list_tools() results in "Tool not found".
                 await session.list_tools()
                 yield cls(session=session)
 
@@ -146,7 +142,6 @@ class PageIndexClient:
             args["folder_id"] = folder_id
         result = await self.session.call_tool("get_document", args)
         return _unwrap(result)
-
 
 def _unwrap(call_result: Any) -> dict[str, Any]:
     """Convert an MCP CallToolResult into a plain dict.

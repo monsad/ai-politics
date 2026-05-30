@@ -19,7 +19,6 @@ _TIER_ENV_VAR = {
 
 _HERMES_BASE_FLAGS = ("-Q", "--accept-hooks", "--yolo")
 
-
 def build_hermes_cmd(
     skill: str,
     query: str,
@@ -60,7 +59,6 @@ def build_hermes_cmd(
 
     cmd += list(_HERMES_BASE_FLAGS)
     return cmd
-
 
 def build_hermes_env(tier: ModelTier = "orchestrator") -> dict[str, str]:
     """Return the env dict for the subprocess.

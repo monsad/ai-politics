@@ -9,15 +9,11 @@ import os
 import re
 from typing import Iterable
 
-# Pattern 1: bare node_id token
 _RE_NODE_ID = re.compile(r"node_id[:=]\s*([A-Za-z0-9_\-./#]+)")
-# Pattern 2: (orig. PL: "..." — doc_name.pdf p.5)  or  ... doc_name.pdf p.5)
-# Capture group 1 = doc_name (without .pdf), group 2 = page or page range
 _RE_DOC_PAGE = re.compile(
     r"([A-Za-z0-9_\-]+)\.pdf\s*(?:p\.|page\s+)(\d+(?:-\d+)?)",
     re.IGNORECASE,
 )
-
 
 def extract_node_ids(transcript_text: str) -> list[str]:
     """Scan transcript and return unique citation tokens in first-seen order.
@@ -34,7 +30,6 @@ def extract_node_ids(transcript_text: str) -> list[str]:
         seen.setdefault(token, None)
     return list(seen.keys())
 
-
 def _split_token(token: str) -> tuple[str, str | None]:
     """Return (doc_name, pages_or_None)."""
     if "#p" in token:
@@ -42,9 +37,7 @@ def _split_token(token: str) -> tuple[str, str | None]:
         return doc + ".pdf", pages
     if token.endswith(".pdf"):
         return token, None
-    # bare node id without doc name — treat as opaque, no page lookup
     return token, None
-
 
 async def validate_citations(node_ids: Iterable[str]) -> dict:
     """Resolve each citation token via PageIndex MCP.
@@ -57,7 +50,7 @@ async def validate_citations(node_ids: Iterable[str]) -> dict:
           "error": str | absent,
         }
     """
-    tokens = list(dict.fromkeys(node_ids))  # de-dupe, preserve order
+    tokens = list(dict.fromkeys(node_ids))
     total = len(tokens)
 
     api_key = os.environ.get("PAGEINDEX_API_KEY", "")
@@ -84,7 +77,6 @@ async def validate_citations(node_ids: Iterable[str]) -> dict:
                     result = await client.get_page_content(doc_name=doc_name, pages=pages)
                 else:
                     result = await client.get_document(doc_name=doc_name)
-                # Treat empty result as unresolvable
                 if not result or (isinstance(result, dict) and not any(result.values())):
                     unresolvable.append(token)
                 else:

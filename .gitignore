@@ -23,13 +23,37 @@ htmlcov/
 
 # Hermes session stdout artifacts (saved by skills during runs)
 /ko-*.md
+/ko_*.txt
 /mf-*.md
+/mf_*.md
 /mrips-*.md
 /mrit-*.md
 /pis-*.md
+/pis_*.md
 /td-*.md
 /td-*.txt
 /prd.md
+/analiza-*.md
+/analiza-*.txt
+/analiza_*.md
+/analiza_*.txt
+/konfederacja-*.md
+/konfederacja_*.txt
+/lewica_*.txt
+/lewica_*.md
+/mce-*.md
+/ministry-*.md
+/ministry-*.txt
+/moh-*.md
+/poland-*.md
+/trzecia-*.md
+/speeches/
+
+# IDE/editor
+.idea/
+.vscode/
+*.swp
+*.swo
 
 sessions.db-shm
 sessions.db-wal

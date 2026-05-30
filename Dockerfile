@@ -21,13 +21,20 @@ RUN apt-get update \
 
 WORKDIR /app
 
+ENV CACHEBUST=2026-05-30T20-40-skills
 COPY pyproject.toml README.md ./
 COPY parliament/ ./parliament/
 COPY skills/ ./skills/
 COPY scripts/ ./scripts/
+COPY deploy/ ./deploy/
 
 RUN pip install --upgrade pip \
     && pip install -e .
+
+# Hermes config + skills — both are looked up under ~/.hermes/ by the runtime
+RUN mkdir -p /root/.hermes/skills \
+    && cp deploy/hermes-config.yaml /root/.hermes/config.yaml \
+    && cp -r skills/* /root/.hermes/skills/
 
 # Static UI from the web-builder stage
 COPY --from=web-builder /web/out/ ./web/out/
@@ -35,4 +42,4 @@ COPY --from=web-builder /web/out/ ./web/out/
 RUN mkdir -p /data
 
 EXPOSE 8000
-CMD ["sh", "-c", "uvicorn parliament.api:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "deploy/entrypoint.sh"]
